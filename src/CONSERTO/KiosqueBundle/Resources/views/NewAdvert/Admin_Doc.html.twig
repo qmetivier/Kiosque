@@ -1,0 +1,30 @@
+{% extends "CONSERTOKiosqueBundle:NewAdvert:Doc.html.twig" %}
+
+{% block body %}
+  {{ parent() }}
+{% endblock %}
+
+{% block upload %}
+    {% if desc_img is defined %}
+        <form action="{{path('conserto_kiosque_doc_admin') }}" id='Form_img' method='post' enctype="multipart/form-data">
+            <input type='file' id='dropArea' class='img_detail_doc' name='img'>
+        <img src='{{img}}' id='Img_doc' class='img_detail_doc'>
+    {% else %}
+        <img src="/Symfony/web/uploads/img/{{magazine.Pdf.id}}.{{ magazine.Pdf.urlImg }}" id='Img_doc' class='img_detail_doc'>
+    {% endif %}
+    {% if desc_img is defined %}
+        {% if desc_img != '' %}
+            <div>{{desc_img}}</div>
+        {% endif %}
+        <br>
+        <input type="submit" class='btn btn_search' value="Générer la couverture"/>
+        </form>
+        <br>
+    {% endif %}
+{% endblock %}
+
+{% block consertokiosque_body %}
+  <div class="well">
+    {{ form(form) }}
+  </div>
+{% endblock %}

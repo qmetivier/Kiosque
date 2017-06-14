@@ -1,0 +1,7 @@
+conserto_user_homepage:
+    path:     /
+    defaults:
+        _controller: FrameworkBundle:Redirect:urlRedirect
+        path: /kiosque
+        permanent: true
+

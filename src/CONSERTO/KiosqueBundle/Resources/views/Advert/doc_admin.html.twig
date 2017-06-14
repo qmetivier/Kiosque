@@ -1,0 +1,21 @@
+{# src/CONSERTO/Kiosque/Resources/views/Advert/doc_admin.html.twig #}
+
+{% extends "CONSERTOKiosqueBundle::layout.html.twig" %}
+
+{% block title %}
+  {{ parent() }}
+{% endblock %}
+
+{% block navBar %}
+  {% include("CONSERTOKiosqueBundle:NewAdvert:Admin.html.twig") %}
+{% endblock %}
+
+{% block body %}
+  {% include("CONSERTOKiosqueBundle:NewAdvert:Admin_Doc.html.twig") %}
+{% endblock %}
+
+{% block javascripts %}
+  {{parent()}}
+  <script src="http://localhost/Symfony/bin/js/add_doc.js"></script>
+
+{% endblock %}

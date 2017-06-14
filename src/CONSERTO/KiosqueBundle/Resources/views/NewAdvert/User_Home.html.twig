@@ -1,0 +1,162 @@
+{% block title %}
+{% endblock %}
+
+{% block navBar %}
+{% endblock %}
+
+{% block body %}
+
+<body>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner carousel_perso" role="listbox">
+  {% for carousel in carousels %}
+  <div class="carousel-item {% if loop.first %} active {% endif %}">
+    <br>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-3">
+          <img src="http://localhost/Symfony/web/uploads/img/{{carousel.Pdf.id}}.{{ carousel.Pdf.urlImg }}" class="carousel_img">
+        </div>
+        <div class="col offset-1">
+        <div class="title">
+          {{ carousel.title }}
+        </div>
+        <div class="Description">
+          {{ carousel.content }}
+        </div>
+            {% if viewmod == 1 %}
+                  <a href="{{path('conserto_kiosque_doc_user',{'id': carousel.id, 'viewmod': true}) }}" class="btn btn-info"> Voir l'article</a>
+                {% else %}
+                  <a href="{{path('conserto_kiosque_doc_user',{'id': carousel.id, 'viewmod': 0}) }}" class="btn btn-info"> Voir l'article</a>
+            {% endif %}
+      </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
+<!-- Barre de recherche -->
+<div class="Search_bar_div">
+<div class="container">
+  <div class="row">
+    <div class="col">
+            <!-- Formulaire de recherche -->
+      <form action="
+      {% if viewmod == 1 %}
+        {{path('conserto_kiosque_home', {'page': 0,'search': search, 'viewmod': true}) }}
+      {% else %}
+        {{path('conserto_kiosque_home', {'page': 0,'search': search}) }}
+      {% endif %}
+      " method="post">
+        <div class="search_bar">
+        <input type="text" class="search_bar_perso" name="search" placeholder=" Recherche dans nos articles" value="{{search}}">
+        <div class="btn-group">
+          <span> Filtrer par : <br> </span>
+          <select class="custom-select" name="search_categorie">
+            <option value="">Catégorie</option>
+            {% for categorie in category %}
+              <option value="{{categorie.name}}"
+              {% if search_categorie == categorie.name %}
+                selected
+              {% endif %}
+              >{{categorie.name}}</option>
+            {% endfor %}
+          </select>
+          <span> Trier par : <br> </span>
+          <select name="sorts" class="custom-select">
+            <option value="date" {% if sorts == "date" %}selected {% endif %}>Date</option>
+            <option value="title"{% if sorts == "title" %}selected {% endif %}>Nom</option>
+          </select>
+            <br>
+          <button class="btn_search btn">Rechercher</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- Affichage des articles -->
+<div class="container body_list_doc">
+<div class="row justify-content-center">
+Il y a  <b class="nb_doc"> {{ nbDoc }} résultats </b> à votre recherche
+</div>
+<div class="row">
+    {% for magazine in magazines %}
+      <div class="col-sm-12 col-md-6 col-lg-4">
+          {% if viewmod == 1 %}
+                  <a href="{{path('conserto_kiosque_doc_user',{'id': magazine.id, 'viewmod': true}) }}" class="a_back_img">
+              {% else %}
+                  <a href="{{path('conserto_kiosque_doc_user',{'id': magazine.id, 'viewmod': 0}) }}" class="a_back_img">
+          {% endif %}
+          <div style="background-image: url(http://localhost/Symfony/web/uploads/img/{{magazine.Pdf.id}}.{{ magazine.Pdf.urlImg }});" class="back_img_img">
+          <div class="back_img">
+            <div class="date_mag">{{ magazine.date|date('d/m/Y')}}</div>
+          </div>
+          </div>
+        </a>
+          <div class="title_doc">{{ magazine.title}}</div>
+            <br>
+          <div class="categorie_doc" style="color: #{{ randomColor() }};">{% for categorie in magazine.categories %}
+                  {{categorie.name}}
+              {% endfor %}
+          </div>
+            <br>
+          <div class="desc_doc">{{ magazine.content}}</div>
+            <br>
+      </div>
+    {% endfor %}
+  </div>
+  </div>
+  <div class="div_btn_page">
+  {% if page > 0 %}
+    <a href='
+    {% if viewmod == true %}
+      {{path('conserto_kiosque_home', {'page': page-1, 'viewmod': true}) }}
+    {% else %}
+      {{path('conserto_kiosque_home', {'page': page-1}) }}
+    {% endif %}
+     ' class='btn btn_nav_page'>Precedent</a>
+  {% endif %}
+  {% for i in 0..nb_page %}
+    <a href='
+        {% if viewmod == true %}
+          {{path('conserto_kiosque_home', {'page': i, 'viewmod': true}) }}
+        {% else %}
+          {{path('conserto_kiosque_home', {'page': i}) }}
+        {% endif %}
+    ' class='btn btn_nav_page
+    {% if i == page %}
+      btn_page_active
+     {% endif %}
+     '>{{i}}</a>
+  {% endfor %}
+  {% if page < nb_page %}
+    <a href='
+        {% if viewmod == true %}
+          {{path('conserto_kiosque_home', {'page': page+1, 'viewmod': true}) }}
+        {% else %}
+          {{path('conserto_kiosque_home', {'page': page+1}) }}
+        {% endif %}
+    ' class='btn btn_nav_page'>Suivant</a>
+  {% endif %}
+  </div>
+  </body>
+
+{% endblock %}

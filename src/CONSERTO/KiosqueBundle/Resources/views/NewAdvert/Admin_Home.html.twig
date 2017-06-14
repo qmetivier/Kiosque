@@ -1,0 +1,118 @@
+
+{% block navBar %}
+{% endblock %}
+
+{% block body %}
+
+<body>
+
+<!-- Barre de recherche -->
+<div class="Search_bar_div">
+<div class="container">
+  <div class="row">
+    <div class="col">
+            <!-- Formulaire de recherche -->
+      <form action="
+      {% if viewmod == true %}
+        {{path('conserto_kiosque_home', {'page': 0,'search': search, 'viewmod': true}) }}
+      {% else %}
+        {{path('conserto_kiosque_home', {'page': 0,'search': search}) }}
+      {% endif %}
+      " method="post">
+        <div class="search_bar">
+        <input type="text" class="search_bar_perso" name="search" placeholder=" Recherche dans nos articles" value="{{search}}">
+        <div class="btn-group">
+          <span> Filtrer par : <br> </span>
+          <select class="custom-select" name="search_categorie">
+            <option value="">Catégorie</option>
+            {% for categorie in category %}
+              <option value="{{categorie.name}}"
+              {% if search_categorie == categorie.name %}
+                selected
+              {% endif %}
+              >{{categorie.name}}</option>
+            {% endfor %}
+          </select>
+          <span> Trier par : <br> </span>
+          <select name="sorts" class="custom-select">
+            <option value="date" {% if sorts == "date" %}selected {% endif %}>Date</option>
+            <option value="title"{% if sorts == "title" %}selected {% endif %}>Nom</option>
+          </select>
+            <br>
+          <button class="btn_search btn">Rechercher</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+
+<div class="container body_list_doc">
+  <div class="row justify-content-center">
+    Il y a  <b class="nb_doc"> {{ nbDoc }} résultats </b> à votre recherche
+  </div>
+    <div class="row">
+        {% for magazine in magazines %}
+        <div class='col-12 div_doc_gestion'>
+          <div class='row'>
+            <div class='offset-2 col-3'><img src="http://localhost/Symfony/web/uploads/img/{{magazine.Pdf.id}}.{{ magazine.Pdf.urlImg }}" class='element_gestion img_gestion'/></div>
+				    <div class='col-5'>
+				        <h3 class='element_gestion'>Titre : {{magazine.title}}</h3>
+                <div class="element_gestion">Catégorie : {% for categorie in magazine.categories %}
+                        {{categorie.name}}
+                    {% endfor %}
+                </div>
+				        <div class='element_gestion_desc'>Description : {{magazine.content}}</div>
+                <div class='row'>
+                  <div class="col-4">
+                    <a class='btn btn-info btn_modify_doc' href="{{path('conserto_kiosque_edit_admin',{'id': magazine.id}) }}">Modifier</a>
+                  </div>
+                  <div class="col-4">
+                    <a class='btn btn-danger btn_delete_doc' href="{{path('conserto_kiosque_delete_admin', {'id': magazine.id})}}">Supprimer</a>
+                  </div>
+                </div>
+				      </div>
+              <div class=" col-2 "></div>
+            </div>
+			    </div>
+        {% endfor %}
+    </div>
+  </div>
+  <div class="div_btn_page">
+  {% if page > 0 %}
+    <a href='
+    {% if viewmod == true %}
+      {{path('conserto_kiosque_home', {'page': page-1, 'viewmod': true}) }}
+    {% else %}
+      {{path('conserto_kiosque_home', {'page': page-1}) }}
+    {% endif %}
+     ' class='btn btn_nav_page'>Precedent</a>
+  {% endif %}
+  {% for i in 0..nb_page %}
+    <a href='
+        {% if viewmod == true %}
+          {{path('conserto_kiosque_home', {'page': i, 'viewmod': true}) }}
+        {% else %}
+          {{path('conserto_kiosque_home', {'page': i}) }}
+        {% endif %}
+    ' class='btn btn_nav_page
+    {% if i == page %}
+      btn_page_active
+     {% endif %}
+     '>{{i}}</a>
+  {% endfor %}
+  {% if page < nb_page %}
+    <a href='
+        {% if viewmod == true %}
+          {{path('conserto_kiosque_home', {'page': page+1, 'viewmod': true}) }}
+        {% else %}
+          {{path('conserto_kiosque_home', {'page': page+1}) }}
+        {% endif %}
+    ' class='btn btn_nav_page'>Suivant</a>
+  {% endif %}
+  </div>
+  </body>
+
+{% endblock %}

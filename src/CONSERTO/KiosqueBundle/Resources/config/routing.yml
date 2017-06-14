@@ -1,0 +1,52 @@
+conserto_login:
+    path: /login
+    defaults:
+        _controller: CONSERTOKiosqueBundle:Advert:formlogin
+
+conserto_kiosque_login:
+    path: /
+    defaults:
+        _controller: CONSERTOKiosqueBundle:Advert:login
+
+
+conserto_kiosque_logout:
+    path:     /logout
+    defaults:
+        _controller: CONSERTOKiosqueBundle:Advert:logout
+
+conserto_kiosque_home:
+    path:     /home/page={page}&viewmod={viewmod}
+    defaults:
+        _controller: CONSERTOKiosqueBundle:Advert:view
+        page: 0
+        sorts_category: ''
+        viewmod: false
+
+conserto_kiosque_doc_user:
+    path:     /home/doc={id}&viewmod={viewmod}
+    defaults:
+        _controller: CONSERTOKiosqueBundle:Advert:show_user
+        id: 1
+
+conserto_kiosque_download_doc:
+    path:    /home/download_doc={id}
+    defaults:
+        _controller: CONSERTOKiosqueBundle:Advert:download_doc_user
+        id: 1
+
+conserto_kiosque_doc_admin:
+    path:     /home/add_doc
+    defaults:
+        _controller: CONSERTOKiosqueBundle:Advert:add_doc_admin
+
+conserto_kiosque_edit_admin:
+    path:    /home/edit_doc={id}
+    defaults:
+        _controller: CONSERTOKiosqueBundle:Advert:edit_doc_admin
+        id: 1
+
+conserto_kiosque_delete_admin:
+    path:    /home/delete_doc={id}
+    defaults:
+        _controller: CONSERTOKiosqueBundle:Advert:delete_doc_admin
+        id: 1

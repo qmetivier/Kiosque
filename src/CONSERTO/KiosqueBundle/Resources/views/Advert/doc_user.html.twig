@@ -1,0 +1,19 @@
+{# src/CONSERTO/Kiosque/Resources/views/Advert/doc_user.html.twig #}
+
+{% extends "CONSERTOKiosqueBundle::layout.html.twig" %}
+
+{% block title %}
+  {{ parent() }}
+{% endblock %}
+
+{% block navBar %}
+    {% if viewmod == 1 %}
+      {% include ("CONSERTOKiosqueBundle:NewAdvert:Admin.html.twig") %}
+    {% else %}
+      {% include("CONSERTOKiosqueBundle:NewAdvert:User.html.twig") %}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+  {% include("CONSERTOKiosqueBundle:NewAdvert:User_Doc.html.twig") %}
+{% endblock %}

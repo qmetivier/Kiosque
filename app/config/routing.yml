@@ -1,0 +1,3 @@
+conserto_kiosque:
+    resource: "@CONSERTOKiosqueBundle/Resources/config/routing.yml"
+    prefix:   /

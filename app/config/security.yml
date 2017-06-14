@@ -1,0 +1,41 @@
+# app/config/security.yml
+
+security:
+
+    encoders:
+        Symfony\Component\Security\Core\User\User: sha512
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: ROLE_ADMIN
+
+    providers:
+        main:
+            id: fos_user.user_provider.username
+        my_ldap:
+            ldap:
+                service: Symfony\Component\Ldap\LdapClient
+                base_dn: 'dc=conserto,dc=pro'
+                search_dn: 'cn=admin,dc=conserto,dc=pro'
+                search_password: 'Choh2Peci8'
+                default_roles: ROLE_USER
+                uid_key: uid
+                filter: (&(objectClass=person)({uid_key}={username}))
+
+    firewalls:
+        main:
+            pattern:        ^/
+            anonymous:      true
+            provider:       my_ldap
+            form_login_ldap:
+                login_path: fos_user_security_login
+                check_path: fos_user_security_check
+                service: Symfony\Component\Ldap\LdapClient
+                dn_string: "cn=Test1 TEST,ou=utilisateurs,dc=conserto,dc=pro"
+            logout:
+                path:       fos_user_security_logout
+                target:     fos_user_security_login
+
+    access_control:
+#        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+#        - { path: ^/kiosque, role: ROLE_USER }

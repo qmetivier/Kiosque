@@ -1,0 +1,36 @@
+{# src/CONSERTO/Kiosque/Resources/views/Advert/doc.html.twig #}
+
+{% extends "CONSERTOKiosqueBundle::layout.html.twig" %}
+
+{% block title %}
+  Doc - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+<body>
+  <div class="body_doc">
+    <div>azeaze</div>
+    <a class="return" href="{{path('conserto_kiosque_home')}}"> <= </a>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          {% block upload %}
+          {% endblock %}
+        </div>
+        <div class="col-lg-6">
+          <div class="detail_doc">
+            <div class="container">
+            {% block consertokiosque_body %}
+
+            {% endblock %}
+            </div>
+          </div>
+        </div>
+        <div class="offset-md-6 offset-lg-0">
+      </div>
+    </div>
+  </div>
+</body>
+
+{% endblock %}

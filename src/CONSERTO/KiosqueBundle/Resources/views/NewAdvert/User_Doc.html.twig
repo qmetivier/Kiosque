@@ -1,0 +1,35 @@
+{% extends "CONSERTOKiosqueBundle:NewAdvert:Doc.html.twig" %}
+
+
+{% block upload %}
+  <img src="/Symfony/web/uploads/img/{{magazine.Pdf.id}}.{{ magazine.Pdf.urlImg }}" class="img_detail_doc">
+{% endblock %}
+
+{% block consertokiosque_body %}
+  {% if form is defined %}
+    <div class="well">
+      {{ form(form) }}
+    </div>
+  {% else %}
+    <div class="title_detail_doc">
+      <span class="">TITRE :</span> {{magazine.title}}
+    </div>
+    <div>
+      <span class="">CATEGORIE :</span>
+        {% for categorie in magazine.categories %}
+            {{categorie.name}}
+        {% endfor %}
+    </div>
+    <div class="desc_detail_doc">
+      <span class="">DESCRIPTION :</span> {{magazine.content}}
+    </div>
+    <div class="justify-content-end">
+      <div class="div_btn col-1">
+        <a href='{{path('conserto_kiosque_download_doc', {'id': magazine.id} )}}' class="btn btn_perso">
+          <i class="fa fa-cloud-download" aria-hidden="true"></i>
+          DONWLOAD
+        </a>
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,15 @@
+{# src/CONSERTO/Kiosque/Resources/views/Advert/preview_admin.html.twig #}
+
+{% extends "CONSERTOKiosqueBundle::layout.html.twig" %}
+
+{% block title %}
+  {{ parent() }}
+{% endblock %}
+
+{% block navBar %}
+  {% include("CONSERTOKiosqueBundle:NewAdvert:Admin.html.twig") %}
+{% endblock %}
+
+{% block body %}
+  {% include("CONSERTOKiosqueBundle:NewAdvert:User_Home.html.twig") %}
+{% endblock %}

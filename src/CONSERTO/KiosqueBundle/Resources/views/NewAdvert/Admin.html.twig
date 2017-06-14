@@ -1,0 +1,32 @@
+
+{% block navBar %}
+
+<div class="div_nav_bar">
+<img src="/Symfony/web/img/Conserto_logo.png" class="logo_nav_bar ">
+<nav class="navbar navbar-toggleable-lg navbar-light bg-faded nav_bar_perso pull-right" style="z-index:1;">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="true" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link pull-center" href="{{path('conserto_kiosque_home', {'viewmod': false}) }}">Gestion des magazines</a>
+        <hr>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link pull-center" href="{{path('conserto_kiosque_home', {'viewmod': true}) }}">Affichage utilisateur</a>
+        <hr>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link pull-center" href="{{path('conserto_kiosque_doc_user', {'viewmod' : 0})}}">Ajouter un magazine</a>
+        <hr>
+      </li>
+      <li class="nav-item li_btn_log_out">
+        <a href="{{path('conserto_kiosque_logout')}}"><div class="btn btn_perso_log_out nav-link"><div class="text_log_out">Se Déconnecter</div></div></a>
+      </li>
+    </ul>
+  </div>
+</nav>
+</div>
+
+{% endblock %}

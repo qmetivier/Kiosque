@@ -1,0 +1,32 @@
+
+{% block body %}
+
+<body>
+  <div class="body_doc">
+    <div class="div_return_btn">
+        {% if viewmod %}
+              <a href="{{path('conserto_kiosque_home',{'viewmod': true})}}" class="return_btn"> <i class="fa fa-arrow-left" aria-hidden="true"></i> Back </a>
+            {% else %}
+              <a href="{{path('conserto_kiosque_home')}}" class="return_btn"> <i class="fa fa-arrow-left" aria-hidden="true"></i> Back </a>
+        {% endif %}
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+                  {% block upload %}
+
+                  {% endblock %}
+        </div>
+          <div class="detail_doc">
+            <div class="container">
+            {% block consertokiosque_body %}
+
+            {% endblock %}
+            </div>
+          </div>
+    </div>
+  </div>
+  </div>
+</body>
+
+{% endblock %}
